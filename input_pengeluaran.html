@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    <title>Input Data Pengeluaran</title>
+
+    <link rel="stylesheet" href="inputstyle.css" />
+  </head>
+
+  <body>
+    <div class = "container">
+        <div class = "navbar">
+            RekapDuit
+            <button type="button" name="logout">LOGOUT</button>
+        </div>
+        <div class = "content">
+        <div class="header">Pendapatan</div>
+        <form>
+            Nama Barang
+            <input type="text" name="nama_barang">
+            Jumlah
+            <input type="text" name="jumlah">
+            Harga
+            <input type="text" name="harga">
+            <div class="bukti">
+                Bukti Pembayaran
+                <button type="button" name="BP">Upload</button>
+            </div>
+            Keterangan
+            <input type="text" name="keterangan">
+            <div class="button">
+                <button type="button">Cancel</button>
+                <button type="submit" name="tambah">Tambah</button>
+            </div>
+        </form>
+        </div>
+    </div>
+
+    <script src="input_ct.js"></script>
+  </body>
+</html>

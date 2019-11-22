@@ -1,0 +1,80 @@
+.container {
+    background-color: #0394fc;
+    width: 98vw;
+    height: 98vh;
+    display: flex;
+    font-size: 18pt;
+    flex-direction: column;
+}
+.navbar{
+    justify-content: space-between;
+    display: flex;
+    width: 100%;
+    height: 30px;
+}
+.navbar button{
+    width: 100px;
+    background-color: #b7dded;
+    border-radius: 6px;    
+}
+.content{
+    display: flex;
+    background-color: white;
+    width: 70vw;
+    height: 80vh;
+    margin: 50px 50px 50px 50px;
+    padding-left: 100px;
+    padding-right: 100px;
+    flex-direction: column;
+}
+.header{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 30px;
+}
+.content form{
+    flex-direction: column;
+    display:flex;
+}
+.content input[type=text]{
+    height: 30px;
+    font-size: 18pt;
+    border: 1px solid #ccc;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    -moz-box-shadow: 2px 2px 3px #666;
+    -webkit-box-shadow: 2px 2px 3px #666;
+    box-shadow: 2px 2px 3px #666;
+    padding: 4px 7px;
+    outline: 0;
+    -webkit-appearance: none;
+}
+.button{
+    display: flex;
+    justify-content: center;
+}
+.button button{
+    margin-top: 10px;
+    height: 30px;
+    width: 100px;
+    margin-right: 50px;
+    background-color: #b7dded;
+    border-radius: 6px;
+}
+.bukti {
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+}
+.bukti button{
+    margin-left: 200px;
+    height: 30px;
+    width: 100px;
+    background-color: #b7dded;
+    border-radius: 6px;
+}
+.text{
+    margin-bottom: 10px;
+}
