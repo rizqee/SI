@@ -11,8 +11,10 @@
         <p class="Title">RekapDuit</p>
         <button class="btnreimburse">Reimburse</button>
         <button class="btnpemasukan">Pemasukan</button>
-        <button class="btn_logout">Logout</button>
-        <p class="logged_in_as">Logged in as Finance Officer</p>
+        <a href="Login.html">
+            <button class="btn_logout">Logout</button>
+        </a>
+            <p class="logged_in_as">Logged in as Finance Officer</p>
     </div>
 
     <div class="main_container" id="container_income">
