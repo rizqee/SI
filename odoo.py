@@ -28,6 +28,49 @@ class Odoo():
             , self.PASS
             , {})
 
+    def expenseReadByIdPegawai(self, id_pegawai):
+        odoo_filter = [[["x_studio_id_pegawai_1", "=", id_pegawai]]]
+        id_pengeluaran = self.ODOO_OBJECT.execute_kw(
+            self.DATA
+            , self.UID
+            , self.PASS
+            , 'x_keterangan' 
+            , 'search'
+            , odoo_filter)
+
+        return (self.expenseRead(id_pengeluaran))
+        
+    def expenseRead(self, id_pengeluaran):
+        result = self.ODOO_OBJECT.execute_kw(
+            self.DATA
+            , self.UID
+            , self.PASS
+            , 'x_keterangan'
+            , 'read'
+            , [id_pengeluaran]
+            , {"fields": ["x_name", "x_studio_nama_barang", "x_studio_jumlah", "x_studio_harga_1", "x_studio_id_pegawai_1", "x_studio_status_reimburse"]})
+        return result
+      
+    def expenseAdd(self, expenseRow):
+        expense_id = self.ODOO_OBJECT.execute_kw(
+            self.DATA
+            , self.UID
+            , self.PASS
+            , 'x_keterangan'
+            , 'create'
+            , expenseRow)
+        return expense_id
+
+    def expensesUpdateStatus(self, id_pengeluaran):
+        update_result = self.ODOO_OBJECT.execute_kw(
+            self.DATA
+            , self.UID
+            , self.PASS
+            , 'x_keterangan'
+            , 'write'
+            , [[id_pengeluaran], {"x_studio_status_reimburse": True}])
+        return update_result
+
     def validateLogin(self, email, password) :
         odoo_filter = [[("x_studio_email", "=", email), ("x_studio_password", "=", password)]]
         result = self.ODOO_OBJECT.execute_kw(
@@ -62,25 +105,6 @@ class Odoo():
         )
         return emp_type[0]["x_studio_emp_type"]
 
-    # def partnerUpdate(self, partner_id, odoo_filter):
-    #     update_result = self.ODOO_OBJECT.execute_kw(
-    #         self.DATA
-    #         , self.UID
-    #         , self.PASS
-    #         , 'res.partner'
-    #         , 'write'
-    #         , [partner_id, odoo_filter])
-    #     return update_result
-    # def partnerDelete(self, partner_id):
-    #     delete_result = self.ODOO_OBJECT.execute_kw(
-    #         self.DATA
-    #         , self.UID
-    #         , self.PASS
-    #         , 'res.partner'
-    #         , 'unlink'
-    #         , [partner_id])
-    #     return delete_result
- 
 def main():
     od = Odoo()
     od.authenticateOdoo()
@@ -88,46 +112,24 @@ def main():
     # Examples:
  
     # CREATE
-    # expenses_row = [{"name":"testbrooooo"
-    #                     , "product_id":2
-    #                     , "unit_amount":44.0
-    #                     , "quantity":55.0
-    #                     , "reference":False
-    #                     , "employee_id":1
-    #                     , "payment_mode":'own_account'}]
-    # od.expensesAdd(expenses_row)
-    # print(od.expensesAdd(expenses_row))
-
-    # print(od.DATA)
-    # print(od)
-
-    # uuid = None
-    # print(od.checkUID("abcd@abcd.com", "abcd"))
+    expenses_row = [{
+            "x_name" : "ini adalah field keterangan",
+            "x_studio_nama_barang" : "added barang",
+            "x_studio_jumlah" : 100,
+            "x_studio_harga_1" : 50000,
+            "x_studio_id_pegawai_1" : 2,
+        }]
+    print(od.expenseAdd(expenses_row))
+    od.expensesUpdateStatus(1);
+    print(od.expenseReadByIdPegawai(2))
+    print(od.expenseRead(1))
 
     email = "abcd@abcd.com"
     password = "abcd"
-
-    # print(od.userCheckEmail(email))
-    # print(od.userCheckPassword(password))
     print(od.validateLogin(email,password))
+    print(od.validateLogin("abcd@abcd.com", "abcd"))
     print(od.getEmployeeType(email,password))
 
-    # # SEARCH
-    # partner_id = od.partnerCheck("HLX")
-    # print(partner_id)
- 
-    # # READ
-    # result = od.expenseRead(2)
-    # print(result)
- 
-    # # UPDATE
-    # odoo_filter = [{"email":"info@hlx.co", "street":"2628 east 18th street"}]
-    # result = od.partnerUpdate(partner_id, odoo_filter)
-    # print(result)
- 
-    # # DELETE
-    # result = od.partnerDelete(partner_id)
-    # print(result)
  
 if __name__ == '__main__':
     main()
