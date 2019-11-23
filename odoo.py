@@ -46,7 +46,22 @@ class Odoo():
             , 'search'
             , odoo_filter)
         return partner_id[0]
- 
+
+    def userCheckEmail(self, email) :
+        odoo_filter = [[("x_studio_email", "=", email)]]
+        result = self.ODOO_OBJECT.execute_kw(
+            self.DATA
+            , self.UID
+            , self.PASS
+            , 'x_username'
+            , 'search'
+            , odoo_filter
+        )
+        try:
+            return result[0]
+        except IndexError as e:
+            pass
+
     def expenseRead(self, expense_id):
         odoo_filter = [[("id", "=", expense_id)]]
         result = self.ODOO_OBJECT.execute_kw(
@@ -107,8 +122,15 @@ def main():
     # od.expensesAdd(expenses_row)
     # print(od.expensesAdd(expenses_row))
 
+    # print(od.DATA)
+    # print(od)
+
+    # uuid = None
+    # print(od.checkUID("abcd@abcd.com", "abcd"))
+
     for i in range(1,12) :
       print(od.validateLogin(i))
+    print(od.userCheckEmail("abcd@abcd.com"))
 
     # # SEARCH
     # partner_id = od.partnerCheck("HLX")
