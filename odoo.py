@@ -36,16 +36,6 @@ class Odoo():
             , 'create'
             , expenseRow)
         return expense_id
-    def partnerCheck(self, partnerName):
-        odoo_filter = [[("name", "=", partnerName)]]
-        partner_id = self.ODOO_OBJECT.execute_kw(
-            self.DATA
-            , self.UID
-            , self.PASS
-            , 'res.partner'
-            , 'search'
-            , odoo_filter)
-        return partner_id[0]
 
     def userCheckEmail(self, email) :
         odoo_filter = [[("x_studio_email", "=", email)]]
@@ -78,7 +68,16 @@ class Odoo():
             pass
 
     def validateLogin(self, email, password) :
-        return (self.userCheckEmail(email) == self.userCheckPassword(password))
+        odoo_filter = [[("x_studio_email", "=", email), ("x_studio_password", "=", password)]]
+        result = self.ODOO_OBJECT.execute_kw(
+            self.DATA
+            , self.UID
+            , self.PASS
+            , 'x_username'
+            , 'search'
+            , odoo_filter
+        )
+        return bool(result)
 
     def expenseRead(self, expense_id):
         odoo_filter = [[("id", "=", expense_id)]]
@@ -134,9 +133,12 @@ def main():
     # uuid = None
     # print(od.checkUID("abcd@abcd.com", "abcd"))
 
-    for i in range(1,12) :
-      print(od.validateLogin(i))
-    print(od.userCheckEmail("abcd@abcd.com"))
+    email = "abcd@abcd.com"
+    password = "abcd"
+
+    # print(od.userCheckEmail(email))
+    # print(od.userCheckPassword(password))
+    print(od.validateLogin(email,password))
 
     # # SEARCH
     # partner_id = od.partnerCheck("HLX")
