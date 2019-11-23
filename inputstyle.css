@@ -3,7 +3,7 @@
     width: 98vw;
     height: 98vh;
     display: flex;
-    font-size: 18pt;
+    font-size: 3.5vh;
     flex-direction: column;
 }
 .navbar{
@@ -22,7 +22,7 @@
     background-color: white;
     width: 70vw;
     height: 80vh;
-    margin: 50px 50px 50px 50px;
+    margin: 5vh 5vw 5vh 5vw;
     padding-left: 100px;
     padding-right: 100px;
     flex-direction: column;
@@ -38,8 +38,9 @@
     display:flex;
 }
 .content input[type=text]{
-    height: 30px;
-    font-size: 18pt;
+    height: 3.5vh;
+    width: 100%;
+    font-size: 3.5vh;
     border: 1px solid #ccc;
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
@@ -77,4 +78,7 @@
 }
 .text{
     margin-bottom: 10px;
+}
+.space{
+    height: 1.5vh;
 }
