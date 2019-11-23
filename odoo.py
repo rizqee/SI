@@ -37,36 +37,6 @@ class Odoo():
             , expenseRow)
         return expense_id
 
-    def userCheckEmail(self, email) :
-        odoo_filter = [[("x_studio_email", "=", email)]]
-        result_id = self.ODOO_OBJECT.execute_kw(
-            self.DATA
-            , self.UID
-            , self.PASS
-            , 'x_username'
-            , 'search'
-            , odoo_filter
-        )
-        try:
-            return result_id[0]
-        except IndexError as e:
-            pass
-
-    def userCheckPassword(self, password) :
-        odoo_filter = [[("x_studio_password", "=", password)]]
-        result_id = self.ODOO_OBJECT.execute_kw(
-            self.DATA
-            , self.UID
-            , self.PASS
-            , 'x_username'
-            , 'search'
-            , odoo_filter
-        )
-        try:
-            return result_id[0]
-        except IndexError as e:
-            pass
-
     def validateLogin(self, email, password) :
         odoo_filter = [[("x_studio_email", "=", email), ("x_studio_password", "=", password)]]
         result = self.ODOO_OBJECT.execute_kw(
