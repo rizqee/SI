@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Expenses & Reimbursement</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+	<link rel="stylesheet" href="style_reimburse_income.css">
+</head>
+
+<body>
+    <div class="navbar"> 
+        <p class="Title">RekapDuit</p>
+        <button class="btnreimburse">Reimburse</button>
+        <button class="btnpemasukan">Pemasukan</button>
+        <button class="btn_logout">Logout</button>
+        <p class="logged_in_as">Logged in as Finance Officer</p>
+    </div>
+    
+    <div class="dropdown_bar">
+        <div class="dropdown" id="proyek">
+            <button class="dropbtn">GoJaya Proyek 
+            <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+            <a href="#">Go Proyek</a>
+            <a href="#">Jaya Proyek</a>
+            </div>
+        </div> 
+
+        <div class="dropdown" id=sort>
+            <button class="dropbtn">Proyek 
+            <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+            <a href="#">Total Harga</a>
+            </div>
+        </div> 
+
+        <p>Sort by</p>
+    </div>
+
+    <div class="main_container" id="container_reimburse">
+        <table class="main_table">
+            <tr>
+                <th>No.</th>
+                <th>Nama Barang</th>
+                <th>Jumlah</th>
+                <th>Harga</th>
+                <th>Total</th>
+                <th>Rincian</th>
+                <th>Valid</th>
+                <th>Kirim</th>
+            </tr>
+            <tr>
+                <td>1 </td>
+                <td>Bensin</td>
+                <td>10L</td>
+                <td>7500/L</td>
+                <td>Rp 75.000,00</td>
+                <td class="rincian"><button class="button rincian">Rincian</button></td>
+                <td class="valid"><input type="checkbox" class="valid" value="Valid"></td>
+                <td class="kirim"><button class="button kirim validasi">Kirim Validasi</button></td>
+            </tr>
+        </table>
+    </div>
+
+</body>
+</html>
