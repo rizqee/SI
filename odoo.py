@@ -49,7 +49,7 @@ class Odoo():
 
     def userCheckEmail(self, email) :
         odoo_filter = [[("x_studio_email", "=", email)]]
-        result = self.ODOO_OBJECT.execute_kw(
+        result_id = self.ODOO_OBJECT.execute_kw(
             self.DATA
             , self.UID
             , self.PASS
@@ -58,7 +58,22 @@ class Odoo():
             , odoo_filter
         )
         try:
-            return result[0]
+            return result_id[0]
+        except IndexError as e:
+            pass
+
+    def userCheckPassword(self, password) :
+        odoo_filter = [[("x_studio_password", "=", password)]]
+        result_id = self.ODOO_OBJECT.execute_kw(
+            self.DATA
+            , self.UID
+            , self.PASS
+            , 'x_username'
+            , 'search'
+            , odoo_filter
+        )
+        try:
+            return result_id[0]
         except IndexError as e:
             pass
 
