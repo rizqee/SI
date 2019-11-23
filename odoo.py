@@ -28,39 +28,18 @@ class Odoo():
             , self.PASS
             , {})
 
-    def userCheckEmail(self, email) :
-        odoo_filter = [[("x_studio_email", "=", email)]]
-        result_id = self.ODOO_OBJECT.execute_kw(
+    def expenseReadByIdPegawai(self, id_pegawai):
+        odoo_filter = [[["x_studio_id_pegawai_1", "=", id_pegawai]]]
+        id_pengeluaran = self.ODOO_OBJECT.execute_kw(
             self.DATA
             , self.UID
             , self.PASS
-            , 'x_username'
+            , 'x_keterangan' 
             , 'search'
-            , odoo_filter
-        )
-        try:
-            return result_id[0]
-        except IndexError as e:
-            pass
+            , odoo_filter)
 
-    def userCheckPassword(self, password) :
-        odoo_filter = [[("x_studio_password", "=", password)]]
-        result_id = self.ODOO_OBJECT.execute_kw(
-            self.DATA
-            , self.UID
-            , self.PASS
-            , 'x_username'
-            , 'search'
-            , odoo_filter
-        )
-        try:
-            return result_id[0]
-        except IndexError as e:
-            pass
-
-    def validateLogin(self, email, password) :
-        return (self.userCheckEmail(email) == self.userCheckPassword(password))
-
+        return (self.expenseRead(id_pengeluaran))
+        
     def expenseRead(self, id_pengeluaran):
         result = self.ODOO_OBJECT.execute_kw(
             self.DATA
@@ -71,28 +50,8 @@ class Odoo():
             , [id_pengeluaran]
             , {"fields": ["x_name", "x_studio_nama_barang", "x_studio_jumlah", "x_studio_harga_1", "x_studio_id_pegawai_1", "x_studio_status_reimburse"]})
         return result
-    
-    def expenseReadByIdPegawai(self, id_pegawai):
-        odoo_filter = [[["x_studio_id_pegawai_1", "=", id_pegawai]]]
-        id_pengeluaran = self.ODOO_OBJECT.execute_kw(
-            self.DATA
-            , self.UID
-            , self.PASS
-            , 'x_keterangan' 
-            , 'search'
-            , odoo_filter)
-        
-        result = self.ODOO_OBJECT.execute_kw(
-            self.DATA
-            , self.UID
-            , self.PASS
-            , 'x_keterangan'
-            , 'read'
-            , [id_pengeluaran]
-            , {"fields": ["x_name", "x_studio_nama_barang", "x_studio_jumlah", "x_studio_harga_1", "x_studio_id_pegawai_1", "x_studio_status_reimburse"]})
-        return result
-        
-    def expensesAdd(self, expenseRow):
+      
+    def expenseAdd(self, expenseRow):
         expense_id = self.ODOO_OBJECT.execute_kw(
             self.DATA
             , self.UID
@@ -112,26 +71,18 @@ class Odoo():
             , [[id_pengeluaran], {"x_studio_status_reimburse": True}])
         return update_result
 
-    def partnerUpdate(self, partner_id, odoo_filter):
-        update_result = self.ODOO_OBJECT.execute_kw(
+    def validateLogin(self, email, password) :
+        odoo_filter = [[("x_studio_email", "=", email), ("x_studio_password", "=", password)]]
+        result = self.ODOO_OBJECT.execute_kw(
             self.DATA
             , self.UID
             , self.PASS
-            , 'res.partner'
-            , 'write'
-            , [partner_id, odoo_filter])
-        return update_result
+            , 'x_username'
+            , 'search'
+            , odoo_filter
+        )
+        return bool(result)
 
-    def partnerDelete(self, partner_id):
-        delete_result = self.ODOO_OBJECT.execute_kw(
-            self.DATA
-            , self.UID
-            , self.PASS
-            , 'res.partner'
-            , 'unlink'
-            , [partner_id])
-        return delete_result
- 
 def main():
     od = Odoo()
     od.authenticateOdoo()
@@ -146,37 +97,15 @@ def main():
             "x_studio_harga_1" : 50000,
             "x_studio_id_pegawai_1" : 2,
         }]
-    print(od.expensesAdd(expenses_row))
-    # print(od.expensesAdd(expenses_row))
+    print(od.expenseAdd(expenses_row))
     od.expensesUpdateStatus(1);
-    # print(od.DATA)
-    # print(od)
-
-    # uuid = None
-    # print(od.checkUID("abcd@abcd.com", "abcd"))
-
-    # for i in range(1,12) :
-    #   print(od.validateLogin(i))
-    # print(od.userCheckEmail("abcd@abcd.com"))
     print(od.expenseReadByIdPegawai(2))
     print(od.expenseRead(1))
 
-    # # SEARCH
-    # partner_id = od.partnerCheck("HLX")
-    # print(partner_id)
- 
-    # # READ
-    # result = od.expenseRead(2)
-    # print(result)
- 
-    # # UPDATE
-    # odoo_filter = [{"email":"info@hlx.co", "street":"2628 east 18th street"}]
-    # result = od.partnerUpdate(partner_id, odoo_filter)
-    # print(result)
- 
-    # # DELETE
-    # result = od.partnerDelete(partner_id)
-    # print(result)
+    email = "abcd@abcd.com"
+    password = "abcd"
+    print(od.validateLogin(email,password))
+    print(od.validateLogin("abcd@abcd.com", "abcd"))
  
 if __name__ == '__main__':
     main()
