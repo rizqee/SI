@@ -61,24 +61,24 @@ class Odoo():
             , {"fields": ["product_id", "unit_amount", "quantity", "total_amount", "reference", "employee_id", "payment_mode"]})
         return result
 
-    def partnerUpdate(self, partner_id, odoo_filter):
-        update_result = self.ODOO_OBJECT.execute_kw(
-            self.DATA
-            , self.UID
-            , self.PASS
-            , 'res.partner'
-            , 'write'
-            , [partner_id, odoo_filter])
-        return update_result
-    def partnerDelete(self, partner_id):
-        delete_result = self.ODOO_OBJECT.execute_kw(
-            self.DATA
-            , self.UID
-            , self.PASS
-            , 'res.partner'
-            , 'unlink'
-            , [partner_id])
-        return delete_result
+    # def partnerUpdate(self, partner_id, odoo_filter):
+    #     update_result = self.ODOO_OBJECT.execute_kw(
+    #         self.DATA
+    #         , self.UID
+    #         , self.PASS
+    #         , 'res.partner'
+    #         , 'write'
+    #         , [partner_id, odoo_filter])
+    #     return update_result
+    # def partnerDelete(self, partner_id):
+    #     delete_result = self.ODOO_OBJECT.execute_kw(
+    #         self.DATA
+    #         , self.UID
+    #         , self.PASS
+    #         , 'res.partner'
+    #         , 'unlink'
+    #         , [partner_id])
+    #     return delete_result
  
 def main():
     od = Odoo()
