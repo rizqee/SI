@@ -59,15 +59,16 @@ class Odoo():
             , {"fields": ["product_id", "unit_amount", "quantity", "total_amount", "reference", "employee_id", "payment_mode"]})
         return result
  
-    def validateLogin(self, user_id):
-        odoo_filter = [[("id", "=", user_id)]]
+    def validateLogin(self, email, password):
+        odoo_filter = [[("email", "=", email)], ["password", "=", password]]
         result = self.ODOO_OBJECT.execute_kw(
             self.DATA
             , self.UID
             , self.PASS
             , 'x_username'
             , 'read'
-            , [user_id]
+            , [email]
+            , [password]
             , {"fields": ["x_name", "x_studio_email", "x_studio_password"]})
         return result
 
@@ -107,8 +108,8 @@ def main():
     # od.expensesAdd(expenses_row)
     # print(od.expensesAdd(expenses_row))
 
-    for i in range(1,12) :
-      print(od.validateLogin(i))
+    # for i in range(1,12) :
+    print(od.validateLogin("abcd@abcd.com", "abcd"))
 
     # # SEARCH
     # partner_id = od.partnerCheck("HLX")
