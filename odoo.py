@@ -27,15 +27,6 @@ class Odoo():
             , self.USER
             , self.PASS
             , {})
-    def expensesAdd(self, expenseRow):
-        expense_id = self.ODOO_OBJECT.execute_kw(
-            self.DATA
-            , self.UID
-            , self.PASS
-            , 'hr.expense'
-            , 'create'
-            , expenseRow)
-        return expense_id
 
     def validateLogin(self, email, password) :
         odoo_filter = [[("x_studio_email", "=", email), ("x_studio_password", "=", password)]]
@@ -48,18 +39,6 @@ class Odoo():
             , odoo_filter
         )
         return bool(result)
-
-    def expenseRead(self, expense_id):
-        odoo_filter = [[("id", "=", expense_id)]]
-        result = self.ODOO_OBJECT.execute_kw(
-            self.DATA
-            , self.UID
-            , self.PASS
-            , 'hr.expense'
-            , 'read'
-            , [expense_id]
-            , {"fields": ["product_id", "unit_amount", "quantity", "total_amount", "reference", "employee_id", "payment_mode"]})
-        return result
 
     # def partnerUpdate(self, partner_id, odoo_filter):
     #     update_result = self.ODOO_OBJECT.execute_kw(
