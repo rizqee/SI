@@ -27,63 +27,18 @@ class Odoo():
             , self.USER
             , self.PASS
             , {})
-<<<<<<< HEAD
-    def expensesAdd(self, expenseRow):
-        expense_id = self.ODOO_OBJECT.execute_kw(
-            self.DATA
-            , self.UID
-            , self.PASS
-            , 'hr.expense'
-            , 'create'
-            , expenseRow)
-        return expense_id
-    def partnerCheck(self, partnerName):
-        odoo_filter = [[("name", "=", partnerName)]]
-        partner_id = self.ODOO_OBJECT.execute_kw(
-            self.DATA
-            , self.UID
-            , self.PASS
-            , 'res.partner'
-            , 'search'
-            , odoo_filter)
-        return partner_id[0]
- 
-    def expenseRead(self, expense_id):
-        odoo_filter = [[("id", "=", expense_id)]]
-        result = self.ODOO_OBJECT.execute_kw(
-            self.DATA
-            , self.UID
-            , self.PASS
-            , 'hr.expense'
-            , 'read'
-            , [expense_id]
-            , {"fields": ["product_id", "unit_amount", "quantity", "total_amount", "reference", "employee_id", "payment_mode"]})
-        return result
- 
-    def validateLogin(self, email, password):
-        odoo_filter = [[("email", "=", email)], ["password", "=", password]]
-=======
 
     def validateLogin(self, email, password) :
         odoo_filter = [[("x_studio_email", "=", email), ("x_studio_password", "=", password)]]
->>>>>>> a4dc6a4d9be76adba18a8a2867f8db7685291638
         result = self.ODOO_OBJECT.execute_kw(
             self.DATA
             , self.UID
             , self.PASS
             , 'x_username'
-<<<<<<< HEAD
-            , 'read'
-            , [email]
-            , [password]
-            , {"fields": ["x_name", "x_studio_email", "x_studio_password"]})
-        return result
-=======
             , 'search'
             , odoo_filter
         )
         return bool(result)
->>>>>>> a4dc6a4d9be76adba18a8a2867f8db7685291638
 
     # def partnerUpdate(self, partner_id, odoo_filter):
     #     update_result = self.ODOO_OBJECT.execute_kw(
@@ -121,10 +76,6 @@ def main():
     # od.expensesAdd(expenses_row)
     # print(od.expensesAdd(expenses_row))
 
-<<<<<<< HEAD
-    # for i in range(1,12) :
-    print(od.validateLogin("abcd@abcd.com", "abcd"))
-=======
     # print(od.DATA)
     # print(od)
 
@@ -137,7 +88,6 @@ def main():
     # print(od.userCheckEmail(email))
     # print(od.userCheckPassword(password))
     print(od.validateLogin(email,password))
->>>>>>> a4dc6a4d9be76adba18a8a2867f8db7685291638
 
     # # SEARCH
     # partner_id = od.partnerCheck("HLX")
