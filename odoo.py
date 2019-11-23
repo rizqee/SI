@@ -27,25 +27,6 @@ class Odoo():
             , self.USER
             , self.PASS
             , {})
-    def expensesAdd(self, expenseRow):
-        expense_id = self.ODOO_OBJECT.execute_kw(
-            self.DATA
-            , self.UID
-            , self.PASS
-            , 'hr.expense'
-            , 'create'
-            , expenseRow)
-        return expense_id
-    def partnerCheck(self, partnerName):
-        odoo_filter = [[("name", "=", partnerName)]]
-        partner_id = self.ODOO_OBJECT.execute_kw(
-            self.DATA
-            , self.UID
-            , self.PASS
-            , 'res.partner'
-            , 'search'
-            , odoo_filter)
-        return partner_id[0]
 
     def userCheckEmail(self, email) :
         odoo_filter = [[("x_studio_email", "=", email)]]
@@ -80,17 +61,56 @@ class Odoo():
     def validateLogin(self, email, password) :
         return (self.userCheckEmail(email) == self.userCheckPassword(password))
 
-    def expenseRead(self, expense_id):
-        odoo_filter = [[("id", "=", expense_id)]]
+    def expenseRead(self, id_pengeluaran):
         result = self.ODOO_OBJECT.execute_kw(
             self.DATA
             , self.UID
             , self.PASS
-            , 'hr.expense'
+            , 'x_keterangan'
             , 'read'
-            , [expense_id]
-            , {"fields": ["product_id", "unit_amount", "quantity", "total_amount", "reference", "employee_id", "payment_mode"]})
+            , [id_pengeluaran]
+            , {"fields": ["x_name", "x_studio_nama_barang", "x_studio_jumlah", "x_studio_harga_1", "x_studio_id_pegawai_1", "x_studio_status_reimburse"]})
         return result
+    
+    def expenseReadByIdPegawai(self, id_pegawai):
+        odoo_filter = [[["x_studio_id_pegawai_1", "=", id_pegawai]]]
+        id_pengeluaran = self.ODOO_OBJECT.execute_kw(
+            self.DATA
+            , self.UID
+            , self.PASS
+            , 'x_keterangan' 
+            , 'search'
+            , odoo_filter)
+        
+        result = self.ODOO_OBJECT.execute_kw(
+            self.DATA
+            , self.UID
+            , self.PASS
+            , 'x_keterangan'
+            , 'read'
+            , [id_pengeluaran]
+            , {"fields": ["x_name", "x_studio_nama_barang", "x_studio_jumlah", "x_studio_harga_1", "x_studio_id_pegawai_1", "x_studio_status_reimburse"]})
+        return result
+        
+    def expensesAdd(self, expenseRow):
+        expense_id = self.ODOO_OBJECT.execute_kw(
+            self.DATA
+            , self.UID
+            , self.PASS
+            , 'x_keterangan'
+            , 'create'
+            , expenseRow)
+        return expense_id
+
+    def expensesUpdateStatus(self, id_pengeluaran):
+        update_result = self.ODOO_OBJECT.execute_kw(
+            self.DATA
+            , self.UID
+            , self.PASS
+            , 'x_keterangan'
+            , 'write'
+            , [[id_pengeluaran], {"x_studio_status_reimburse": True}])
+        return update_result
 
     def partnerUpdate(self, partner_id, odoo_filter):
         update_result = self.ODOO_OBJECT.execute_kw(
@@ -101,6 +121,7 @@ class Odoo():
             , 'write'
             , [partner_id, odoo_filter])
         return update_result
+
     def partnerDelete(self, partner_id):
         delete_result = self.ODOO_OBJECT.execute_kw(
             self.DATA
@@ -118,25 +139,27 @@ def main():
     # Examples:
  
     # CREATE
-    # expenses_row = [{"name":"testbrooooo"
-    #                     , "product_id":2
-    #                     , "unit_amount":44.0
-    #                     , "quantity":55.0
-    #                     , "reference":False
-    #                     , "employee_id":1
-    #                     , "payment_mode":'own_account'}]
-    # od.expensesAdd(expenses_row)
+    expenses_row = [{
+            "x_name" : "ini adalah field keterangan",
+            "x_studio_nama_barang" : "added barang",
+            "x_studio_jumlah" : 100,
+            "x_studio_harga_1" : 50000,
+            "x_studio_id_pegawai_1" : 2,
+        }]
+    print(od.expensesAdd(expenses_row))
     # print(od.expensesAdd(expenses_row))
-
+    od.expensesUpdateStatus(1);
     # print(od.DATA)
     # print(od)
 
     # uuid = None
     # print(od.checkUID("abcd@abcd.com", "abcd"))
 
-    for i in range(1,12) :
-      print(od.validateLogin(i))
-    print(od.userCheckEmail("abcd@abcd.com"))
+    # for i in range(1,12) :
+    #   print(od.validateLogin(i))
+    # print(od.userCheckEmail("abcd@abcd.com"))
+    print(od.expenseReadByIdPegawai(2))
+    print(od.expenseRead(1))
 
     # # SEARCH
     # partner_id = od.partnerCheck("HLX")
