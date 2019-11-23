@@ -13,7 +13,6 @@ if (isset($_POST['submit'])) {
     foreach ($array_output as $key => $value) {
         parse_str($value, $parsed);
         print_r($parsed);
-        echo "\n";
     }
     // echo $array_output;
     // parse_str($output, $parsed);
