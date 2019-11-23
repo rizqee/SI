@@ -51,29 +51,24 @@ class Odoo():
             , {"fields": ["x_name", "x_studio_id_sender", "x_studio_project_name", "x_studio_earnings", "x_studio_date", "x_studio_date_finish_1", "x_studio_field_wtFYA"]})
         return result
 
+od = Odoo()
+od.authenticateOdoo()
 
-def main():
-    pengirim = sys.argv[1]
-    proyek = sys.argv[2]
-    pendapatan = sys.argv[3]
-    waktu_awal = sys.argv[4]
-    waktu_akhir = sys.argv[5]
-    keterangan = sys.argv[6]
-
-    od = Odoo()
-    od.authenticateOdoo()
-
-    id_sender = random.randint(1,100)
-
-    income_row = [{"x_name": pengirim
-                        , "x_studio_id_sender": id_sender
-                        , "x_studio_project_name": proyek
-                        , "x_studio_earnings": pendapatan
-                        , "x_studio_date": waktu_awal
-                        , "x_studio_date_finish_1": waktu_akhir
-                        , "x_studio_field_wtFYA":keterangan}]
-    income_id = od.incomeAdd(income_row)
-
-
-if __name__ == '__main__':
-    main()
+output=""
+for i in range(1,100) :
+    row = (od.incomeRead(i))
+    if (len(row)!=0):
+        output += "nama_pengirim="
+        output += (row[0]["x_name"]) + "&"
+        output += "nama_proyek="
+        output += (row[0]["x_studio_project_name"]) +"&"
+        output += "pendapatan="
+        output += str((row[0]["x_studio_earnings"])) + "&"
+        output += "waktu_proyek_start="
+        output += (row[0]["x_studio_date"]) + "&"
+        output += "waktu_proyek_finish="
+        output += str((row[0]["x_studio_date_finish_1"])) + "&"
+        output += "keterangan="
+        output += (row[0]["x_studio_field_wtFYA"]) + ","
+        
+print(output)   

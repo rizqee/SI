@@ -9,11 +9,8 @@ if (isset($_POST['submit'])) {
     $keterangan = $_POST['keterangan'];
 
     $output = shell_exec("python odoo_income.py $pengirim $proyek $pendapatan $waktu_start $waktu_finish $keterangan");
-    $array_output = explode(",", $output);
-    foreach ($array_output as $key => $value) {
-        parse_str($value, $parsed);
-        print_r($parsed);
-    }
+    header("Location: Pendapatan_page.php");
+
     // echo $array_output;
     // parse_str($output, $parsed);
     // print_r($parsed);
