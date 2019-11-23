@@ -63,3 +63,39 @@
     margin-right: 50px;
     display: flex;
 }
+
+.main_table{
+    margin: 0 auto;
+}
+
+th{
+    padding:1%;
+}
+
+tr td{
+    padding: 1%;
+}
+
+.main_table, th, td{
+    overflow: auto;
+    table-layout: fixed;
+    width: 98%;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+.rincian{
+    text-align: center;
+}
+
+.bukti{
+    text-align: center;
+}
+
+.valid{
+    text-align: center;
+}
+
+.kirim{
+    text-align: center;
+}

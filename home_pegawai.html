@@ -8,6 +8,7 @@
     <title>Home</title>
 
     <link rel="stylesheet" href="homestyle.css" />
+    <script src="home_ct.js"></script>
   </head>
 
   <body>
@@ -18,7 +19,7 @@
         </div>
         <div class = "content">
             <div class="table">
-                <table>
+                <table class="main_table">
                     <tr>
                         <th>No.</th>
                         <th>Nama Barang</th>
@@ -29,16 +30,25 @@
                         <th>Bukti Pembayaran</th>
                         <th>Keterangan</th>
                     </tr>
+                    <tr>
+                        <td>1 </td>
+                        <td>Bensin</td>
+                        <td>10L</td>
+                        <td>7500/L</td>
+                        <td>Rp 75.000,00</td>
+                        <td class="rincian"><button class="button_rincian">Rincian</button></td>
+                        <td class="bukti"><button class="button_bukti">Lihat Bukti</button></td>
+                        <td>Untuk Transportasi</td>
+                    </tr>
                 </table>
             </div>
             <div class="Button" >
-                    <button type="button" name = "add">Add</button>
+                    <button type="button" name = "add" onclick="add_expense()">Add</button>
                     <div class="divider"></div>
                     <button type="button" name = "delete">Delete</button>
             </div>
         </div>
     </div>
 
-    <script src="home_ct.js"></script>
   </body>
 </html>

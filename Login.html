@@ -3,21 +3,21 @@
 <head>
     <title>Login RekapDuit</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-	<link rel="stylesheet" href="style_login.css">
+    <link rel="stylesheet" href="style_login.css">
 </head>
 
 <body>
     <div class="form" id="myForm">
-        <form action="#" class="form-container">
+        <form action="validasi.php" method="POST" class="form-container">
         <h1>Login</h1>
     
         <label for="email"><b>Email</b></label>
-        <input type="text" placeholder="Enter Email" name="email" required>
+        <input type="text" placeholder="Enter Email" name="email" id="email" required>
     
         <label for="psw"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="psw" required>
+        <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
     
-        <button type="submit" class="btn">Login</button>
+        <button type="submit" name="submit" class="btn" id="btn" value="submit">Login</button>
         </form>
     </div>
 </body>
