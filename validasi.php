@@ -10,7 +10,7 @@ if (isset($_POST['submit'])) {
         header("Location: home_pegawai.html");
     }else if($output == "pengawas\n"){
         header("Location: home_pengawas.html");
-    }else if($output == "finance\n"){
+    }else if($output == "finance-officer\n"){
         header("Location: Reimburse.html");
     }else if($output == "login error\n"){
         echo("login error");
