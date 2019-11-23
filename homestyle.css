@@ -51,3 +51,15 @@
     width: 20px;
 
 }
+.pick{
+    margin-top: 40px;
+    margin-left: 30px;
+    font-size: 12pt;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.sort{
+    margin-right: 50px;
+    display: flex;
+}
