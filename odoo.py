@@ -77,6 +77,9 @@ class Odoo():
         except IndexError as e:
             pass
 
+    def validateLogin(self, email, password) :
+        return (self.userCheckEmail(email) == self.userCheckPassword(password))
+
     def expenseRead(self, expense_id):
         odoo_filter = [[("id", "=", expense_id)]]
         result = self.ODOO_OBJECT.execute_kw(
@@ -87,18 +90,6 @@ class Odoo():
             , 'read'
             , [expense_id]
             , {"fields": ["product_id", "unit_amount", "quantity", "total_amount", "reference", "employee_id", "payment_mode"]})
-        return result
- 
-    def validateLogin(self, user_id):
-        odoo_filter = [[("id", "=", user_id)]]
-        result = self.ODOO_OBJECT.execute_kw(
-            self.DATA
-            , self.UID
-            , self.PASS
-            , 'x_username'
-            , 'read'
-            , [user_id]
-            , {"fields": ["x_name", "x_studio_email", "x_studio_password"]})
         return result
 
     def partnerUpdate(self, partner_id, odoo_filter):
