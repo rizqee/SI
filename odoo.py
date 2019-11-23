@@ -83,6 +83,28 @@ class Odoo():
         )
         return bool(result)
 
+    def getEmployeeType(self, email, password) :
+        email_password_filter = [[("x_studio_email", "=", email), ("x_studio_password", "=", password)]]
+        id = self.ODOO_OBJECT.execute_kw(
+            self.DATA
+            , self.UID
+            , self.PASS
+            , 'x_username'
+            , 'search'
+            , email_password_filter
+        )
+        # id_filter = [[("id", "=", id[0])]]
+        emp_type = self.ODOO_OBJECT.execute_kw(
+            self.DATA
+            , self.UID
+            , self.PASS
+            , 'x_username'
+            , 'read'
+            , [id]
+            , {"fields": ["x_studio_emp_type"]}
+        )
+        return emp_type[0]["x_studio_emp_type"]
+
 def main():
     od = Odoo()
     od.authenticateOdoo()
@@ -106,6 +128,8 @@ def main():
     password = "abcd"
     print(od.validateLogin(email,password))
     print(od.validateLogin("abcd@abcd.com", "abcd"))
+    print(od.getEmployeeType(email,password))
+
  
 if __name__ == '__main__':
     main()
