@@ -6,7 +6,7 @@ if (isset($_POST['submit'])) {
     
     $output = shell_exec("python validasi.py $email $psw");
     if($output == "pegawai\n"){
-        header("Location: home_pegawai.html");
+        header("Location: home_pegawai.php");
     }else if($output == "pengawas\n"){
         header("Location: home_pengawas.html");
     }else if($output == "finance-officer\n"){

@@ -9,7 +9,7 @@
 <body>
     <div class="navbar"> 
         <p class="Title">RekapDuit</p>
-        <button class="btnreimburse">Reimburse</button>
+        <a href="Reimburse.html"><button class="btnreimburse">Reimburse</button><a>
         <button class="btnpemasukan">Pemasukan</button>
         <a href="Login.html">
             <button class="btn_logout">Logout</button>

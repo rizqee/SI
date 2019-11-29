@@ -32,8 +32,9 @@
                     </tr>
                     <?php
                         $output = shell_exec("python odoo_show_outcome.py");
+                        //echo $output;
                         $array_output = explode(",", $output);
-                        echo $array_output;
+                        //echo $array_output;
                         $x=1;
                         foreach ($array_output as $key => $value) {
                             if ($x<count($array_output)){
